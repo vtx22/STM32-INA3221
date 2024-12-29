@@ -29,7 +29,11 @@ class INA3221
 public:
     INA3221(I2C_HandleTypeDef *hi2c, uint8_t address);
 
+    void set_shunt_resistor(INA_CHANNEL channel, float resistance);
+
 private:
     I2C_HandleTypeDef *_hi2c = nullptr;
     uint8_t _address;
+
+    float _resistances[3] = {0.f};
 };
