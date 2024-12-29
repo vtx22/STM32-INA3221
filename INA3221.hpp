@@ -31,6 +31,9 @@ public:
 
     void set_shunt_resistor(INA3221_CHANNEL channel, float resistance);
 
+    uint16_t get_manufacturer_id();
+    uint16_t get_die_id();
+
 private:
     I2C_HandleTypeDef *_hi2c = nullptr;
     uint8_t _address;
