@@ -44,5 +44,5 @@ private:
 
     uint16_t read_reg(INA3221_REGISTER reg);
 
-    float _resistances[3] = {0.f};
+    float _resistances[3] = {0, 0, 0};
 };
