@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-enum class INA_REGISTER
+enum class INA3221_REGISTER
 {
     CONFIG = 0x00,
 
@@ -35,7 +35,7 @@ enum class INA_REGISTER
 
 };
 
-enum class INA_CHANNEL
+enum class INA3221_CHANNEL
 {
     CHANNEL_1,
     CHANNEL_2,
