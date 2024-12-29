@@ -35,5 +35,7 @@ private:
     I2C_HandleTypeDef *_hi2c = nullptr;
     uint8_t _address;
 
+    uint16_t read_reg(INA3221_REGISTER reg);
+
     float _resistances[3] = {0.f};
 };

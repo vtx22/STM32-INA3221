@@ -8,3 +8,8 @@ void INA3221::set_shunt_resistor(INA3221_CHANNEL channel, float resistance)
 {
     _resistances[(int)channel] = resistance;
 }
+uint16_t INA3221::read_reg(INA3221_REGISTER reg)
+{
+    uint16_t data = read_i2c_reg_16(_hi2c, _address, (uint8_t)reg);
+    return (data >> 8) + (data << 8);
+}
