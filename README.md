@@ -12,11 +12,11 @@ INA3221 ina(&hi2c1, 0x40);
 // Specify shunt resistance for each channel that you want to use
 ina.set_shunt_resistance(INA3221_CHANNEL::CHANNEL_1, 10e-3);  // 10 mOhm shunt resistor for channel 1
 
-// Simple loop to read bus voltage and current
+// Simple loop to read bus voltage and offset corrected current
 while(true)
 {
   float bus_voltage = ina.get_bus_voltage(INA3221_CHANNEL::CHANNEL_1);
-  float current = ina.get_current_raw(INA3221_CHANNEL::CHANNEL_1);
+  float current = ina.get_current_corrected(INA3221_CHANNEL::CHANNEL_1);
 
   HAL_Delay(100);
 }
