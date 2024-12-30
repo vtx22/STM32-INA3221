@@ -9,6 +9,11 @@ void INA3221::set_shunt_resistor(INA3221_CHANNEL channel, float resistance)
     _resistances[(int)channel] = resistance;
 }
 
+void INA3221::set_filter_resistor(INA3221_CHANNEL channel, float resistance)
+{
+    _filters[(int)channel] = resistance;
+}
+
 float INA3221::get_bus_voltage(INA3221_CHANNEL channel)
 {
     switch (channel)

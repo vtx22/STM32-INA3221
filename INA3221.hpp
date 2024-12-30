@@ -30,6 +30,7 @@ public:
     INA3221(I2C_HandleTypeDef *hi2c, uint8_t address);
 
     void set_shunt_resistor(INA3221_CHANNEL channel, float resistance);
+    void set_filter_resistor(INA3221_CHANNEL channel, float resistance);
 
     float get_bus_voltage(INA3221_CHANNEL channel);
     float get_shunt_voltage(INA3221_CHANNEL channel);
@@ -45,4 +46,5 @@ private:
     uint16_t read_reg(INA3221_REGISTER reg);
 
     float _resistances[3] = {0, 0, 0};
+    float _filters[3] = {0, 0, 0};
 };
