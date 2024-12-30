@@ -90,6 +90,33 @@ float INA3221::get_shunt_voltage_raw(INA3221_CHANNEL channel)
 }
 
 /*
+Get corrected shunt voltage using the estimated shunt voltage offset.
+
+@param INA channel
+@return Corrected shunt voltage [V]
+*/
+float INA3221::get_shunt_voltage_corrected(INA3221_CHANNEL channel)
+{
+    return get_shunt_voltage_raw(channel) - get_shunt_voltage_offset(channel);
+}
+
+/*
+Get the estimated shunt voltage offset
+
+@param channel INA channel
+@return Estimated shunt voltage offset [V]
+*/
+float INA3221::get_shunt_voltage_offset(INA3221_CHANNEL channel)
+{
+    float Ub = get_bus_voltage(channel);
+    float i_bias = 10e-6;
+    float Rf = _filters[(int)channel];
+    float r_in = 670e3;
+
+    return (Ub / (Rf + r_in) + i_bias) * Rf - i_bias * Rf;
+}
+
+/*
 Get the raw current which is calculated by: current = shunt_voltage / shunt_resistance
 
 No offset correction is performed. See get_current_corrected
