@@ -34,7 +34,7 @@ public:
 
     float get_bus_voltage(INA3221_CHANNEL channel);
     float get_shunt_voltage(INA3221_CHANNEL channel);
-    float get_current(INA3221_CHANNEL channel);
+    float get_current_raw(INA3221_CHANNEL channel);
 
     uint16_t get_manufacturer_id();
     uint16_t get_die_id();

@@ -56,7 +56,7 @@ float INA3221::get_shunt_voltage(INA3221_CHANNEL channel)
     return raw * 5e-6;
 }
 
-float INA3221::get_current(INA3221_CHANNEL channel)
+float INA3221::get_current_raw(INA3221_CHANNEL channel)
 {
     return get_shunt_voltage(channel) / _resistances[(int)channel];
 }
