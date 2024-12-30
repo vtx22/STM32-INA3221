@@ -79,5 +79,7 @@ The raw current can have a relevant offset, especially if filter resistors are u
 ```c++
 float INA3221::get_current_corrected(INA3221_CHANNEL channel);
 ```
+
 ℹ️ Getting the corrected current takes slightly longer because the bus voltage is read for offset correction.
+
 ---
