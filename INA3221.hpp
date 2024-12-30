@@ -33,7 +33,7 @@ public:
     void set_filter_resistor(INA3221_CHANNEL channel, float resistance);
 
     float get_bus_voltage(INA3221_CHANNEL channel);
-    float get_shunt_voltage(INA3221_CHANNEL channel);
+    float get_shunt_voltage_raw(INA3221_CHANNEL channel);
     float get_current_raw(INA3221_CHANNEL channel);
     float get_current_corrected(INA3221_CHANNEL channel);
 
