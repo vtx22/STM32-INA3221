@@ -4,16 +4,33 @@ INA3221::INA3221(I2C_HandleTypeDef *hi2c, uint8_t address) : _hi2c(hi2c), _addre
 {
 }
 
+/*
+Set the shunt resistor value
+@param channel INA Channel
+@param resistance Shunt resistance value [Ohm]
+*/
 void INA3221::set_shunt_resistor(INA3221_CHANNEL channel, float resistance)
 {
     _resistances[(int)channel] = resistance;
 }
 
+/*
+Set the channel filter resistance which is connected to IN- and IN+
+
+@param channel INA Channel
+@param resistance Filter resistance value (of single line) [Ohm]
+*/
 void INA3221::set_filter_resistor(INA3221_CHANNEL channel, float resistance)
 {
     _filters[(int)channel] = resistance;
 }
 
+/*
+Get the current bus voltage measurement
+
+@param channel INA channel
+@return Bus voltage of given channel [V]
+*/
 float INA3221::get_bus_voltage(INA3221_CHANNEL channel)
 {
     switch (channel)
@@ -30,6 +47,12 @@ float INA3221::get_bus_voltage(INA3221_CHANNEL channel)
     }
 }
 
+/*
+Get the current shunt voltage
+
+@param channel INA channel
+@return Shunt voltage of given channel [V]
+*/
 float INA3221::get_shunt_voltage(INA3221_CHANNEL channel)
 {
     uint16_t raw = 0;
@@ -56,11 +79,29 @@ float INA3221::get_shunt_voltage(INA3221_CHANNEL channel)
     return raw * 5e-6;
 }
 
+/*
+Get the raw current which is calculated by: current = shunt_voltage / shunt_resistance
+
+No offset correction is performed. See get_current_corrected
+
+@param channel INA channel
+@return Measured raw/uncorrected current for given channel [A]
+*/
 float INA3221::get_current_raw(INA3221_CHANNEL channel)
 {
     return get_shunt_voltage(channel) / _resistances[(int)channel];
 }
 
+/*
+Get the corrected current
+
+This method corrects the shunt voltage by estimating the bias current induced shunt voltage offset.
+This method should be used for maximum accuracy, especially when low currents are measured and when filter resistors are used.
+This method is slightly slower than get_current_raw.
+
+@param channel INA channel
+@return Current measurement which was corrected using the estimated shunt voltage offset [A]
+*/
 float INA3221::get_current_corrected(INA3221_CHANNEL channel)
 {
     float Rf = _filters[(int)channel];
