@@ -69,6 +69,13 @@ float INA3221::get_shunt_voltage_corrected(INA3221_CHANNEL channel);
 ```
 ℹ️ Getting the corrected shunt voltage takes slightly longer because the bus voltage is read for offset correction.
 
+To get the estimated shunt voltage offset that is used for shunt voltage offset correction, use
+```c++
+float get_shunt_voltage_offset(INA3221_CHANNEL channel);
+```
+
+⚠️ The estimated shunt voltage offset is slightly different from the one used for corrected current calculation.
+
 ---
 ### Current
 The current measurement is calculated using the shunt resistance and the measured shunt voltage. 
