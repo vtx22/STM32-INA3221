@@ -1,5 +1,5 @@
 # STM32-INA3221
-STM32 Library for the Texas Instruments INA3221 I2C Power Monitor IC
+STM32 library for the Texas Instruments INA3221 I2C 3-Channel Power Monitor IC
 
 ## Usage Example
 ### Simple Code
