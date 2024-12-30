@@ -52,4 +52,32 @@ Each channel filter resistance can be set independently. The default value is `0
 void set_filter_resistor(INA3221_CHANNEL channel, float resistance);
 ```
 ---
+### Bus voltage
+The bus voltage is the high side power supply voltage that is connected to the `IN+` pin of the given channel. The maximum allowed voltage is `26 V`. The measurement resolution is `8 mV`.
+```c++
+float INA3221::get_bus_voltage(INA3221_CHANNEL channel);
+```
+---
+### Shunt voltage
+The shunt voltage is the measured voltage drop across the shunt resistor. The shunt voltage resolution is `40 uV`.
+```c++
+float INA3221::get_shunt_voltage_raw(INA3221_CHANNEL channel);
+```
+The raw shunt voltage can have a relevant offset, especially if filter resistors are used or if the measured current is small. For offset corrected readings, use
+```c++
+float INA3221::get_shunt_voltage_corrected(INA3221_CHANNEL channel);
+```
+ℹ️ Getting the corrected shunt voltage takes slightly longer because the bus voltage is read for offset correction.
 
+---
+### Current
+The current measurement is calculated using the shunt resistance and the measured shunt voltage. 
+```c++
+float INA3221::get_current_raw(INA3221_CHANNEL channel);
+```
+The raw current can have a relevant offset, especially if filter resistors are used or if the measured current is small. For offset corrected readings, use
+```c++
+float INA3221::get_current_corrected(INA3221_CHANNEL channel);
+```
+ℹ️ Getting the corrected current takes slightly longer because the bus voltage is read for offset correction.
+---
