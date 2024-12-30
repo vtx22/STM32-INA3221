@@ -11,6 +11,11 @@ Set the shunt resistor value
 */
 void INA3221::set_shunt_resistor(INA3221_CHANNEL channel, float resistance)
 {
+    if (resistance < 1e-9)
+    {
+        return;
+    }
+
     _resistances[(int)channel] = resistance;
 }
 
@@ -22,6 +27,11 @@ Set the channel filter resistance which is connected to IN- and IN+
 */
 void INA3221::set_filter_resistor(INA3221_CHANNEL channel, float resistance)
 {
+    if (resistance < 0)
+    {
+        return;
+    }
+
     _filters[(int)channel] = resistance;
 }
 
