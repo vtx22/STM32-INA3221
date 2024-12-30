@@ -61,6 +61,18 @@ float INA3221::get_current_raw(INA3221_CHANNEL channel)
     return get_shunt_voltage(channel) / _resistances[(int)channel];
 }
 
+float INA3221::get_current_corrected(INA3221_CHANNEL channel)
+{
+    float Rf = _filters[(int)channel];
+    float Rs = _resistances[(int)channel];
+    float Ub = get_bus_voltage(channel);
+    float Um = get_shunt_voltage(channel);
+    float r_in = 670e3;
+    float i_bias = 10e-6;
+
+    return (Um * (Rf + r_in) - Rf * Ub) / (r_in * Rs) + i_bias;
+}
+
 uint16_t INA3221::get_manufacturer_id()
 {
     return read_reg(INA3221_REGISTER::MANUFACTURER_ID);
