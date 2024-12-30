@@ -50,10 +50,10 @@ float INA3221::get_shunt_voltage(INA3221_CHANNEL channel)
     if (raw & 0x8000)
     {
         uint16_t complement = (~raw) + 1;
-        return -(complement * 40e-6);
+        return -(complement * 5e-6);
     }
 
-    return raw * 40e-6;
+    return raw * 5e-6;
 }
 
 float INA3221::get_current(INA3221_CHANNEL channel)
